@@ -1,6 +1,8 @@
 import { User } from "../models/user.model.js";
-import bcryptjs from "bcryptjs";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.util.js";
+import bcryptjs from "bcryptjs";
+import { sendVerificationEmail } from "../mailtrap/emails.js";
+
 
 export const signUp = async (req,res) =>{
     //res.send("SignUp route");
@@ -12,6 +14,8 @@ export const signUp = async (req,res) =>{
         }
 
         const userAlreadyExists = await User.findOne({email});
+        //console.log("userAlreadyExists", userAlreadyExists);
+        
         if(userAlreadyExists){
             return res
             .status(400)
@@ -39,6 +43,9 @@ export const signUp = async (req,res) =>{
 
         //jwt
         generateTokenAndSetCookie(res,user._id);
+        
+        await sendVerificationEmail(user.email, verificationToken);
+        
         res
         .status(201)
         .json(
@@ -56,12 +63,12 @@ export const signUp = async (req,res) =>{
         .status(400).json(
             {
                 success: false,
-                message: error.message
+                message: error.message,
             }
-        )
+        );
     }
 };
 export const logOut = (req,res) =>{
     res.send("logOut route");}
-export const Login = (req,res) =>{
-    res.send("Login route");}
+export const LogIn = (req,res) =>{
+    res.send("LogIn route");}

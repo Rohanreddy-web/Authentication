@@ -5,23 +5,24 @@ const userSchema = new mongoose.Schema(
         email: {
             type : String,
             required: true,
-            unique: true
+            unique: true,
         },
         password : {
             type: String,
             required: true,
             
         },
-        user : {
+        name : {
             type: String,
-            required : true
+            required : true,
         },
         lastLogin: {
-            type: Date.now
+            type: Date,
+            default: Date.now,
         },
         isVerified: {
             type: Boolean,
-            default: false
+            default: false,
         },
         resetPasswordToken: String,
         resetPasswordExpiredAt: Date,
@@ -31,4 +32,4 @@ const userSchema = new mongoose.Schema(
     {timestamps: true} // createdAt & updatedAt fields are auto added to documents
     );
 
-    export const User = mongoose.model('User', userSchema);
+    export const User = mongoose.model("User", userSchema);
