@@ -1,7 +1,10 @@
 import  express  from "express";
-import { LogIn, logOut, signUp, verifyMail, forgotPassword, resetPassword } from "../controllers/auth.controller.js";
+import { LogIn, logOut, signUp, verifyMail, forgotPassword, resetPassword, checkAuth } from "../controllers/auth.controller.js";
+import { verifyToken } from "../middleware/verifyToken.js";
 
 const router = express.Router();
+
+router.get("/check-auth",verifyToken, checkAuth)//adding a middleware to check the author is verified or not
 
 router.post("/signup",signUp)
 router.post("/logout",logOut)
