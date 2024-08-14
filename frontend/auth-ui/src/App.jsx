@@ -1,4 +1,8 @@
-import FloatingShape from "./component/FloatingShape"
+import {BrowserRouter, Routes,Route  } from "react-router-dom";
+import FloatingShape from "./component/FloatingShape.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+
 function App() {
 
   return (
@@ -10,15 +14,17 @@ function App() {
       color="bg-gray-900" size="w-48 h-48" top="70%" left = "80%" delay ={5}
       />
       <FloatingShape 
-      color="bg-gray-900" size="w-32 h-32" top="40%" left = "-10%" delay ={5}
+      color="bg-gray-900" size="w-32 h-32" top="40%" left = "-10%" delay ={2}
       />
+      <BrowserRouter>
       <Routes>
-        <Route path="/" element = {"Home"}/>
-        <Route path="/signup" element = {<SignUpPage/>}/>
-        <Route path="/login" element = {<LoginPage/>}/>
+        <Route path='/' element = {"Home"}/>
+        <Route path='/signup' element = {<SignUpPage/>}/>
+        <Route path='/login' element = {<LoginPage/>}/>
       </Routes>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
 export default App
