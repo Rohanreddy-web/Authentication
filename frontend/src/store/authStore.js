@@ -7,7 +7,7 @@ export const useAuthStore = create((set)=> ({
     user: null,
     isAunthenticated : false,
     error: null,
-    isLoading:false,
+    isLoading: false,
     isCheckingAuth : true,
     message:null,
 
@@ -17,11 +17,11 @@ export const useAuthStore = create((set)=> ({
             const response = await axios.post(`${API_URL}/signup`,{email,password,name});
             set({user:response.data.user,
                 isAunthenticated:true,
-                isLoading:false,},
-                )
+                isLoading:false,
+                })
         } catch (error) {
-            set({error:error.response.data.message || "Error Signing up", isLoading: false,});
+            set({error:error.response.data.message || "Error Signing up", isLoading: false});
             throw error;
         }
-    }
-}))
+    },
+}));

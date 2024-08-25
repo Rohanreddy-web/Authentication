@@ -1,10 +1,10 @@
 import {motion} from "framer-motion";
-import Input from '../component/input';
+import Input from '../component/Input';
 import {React,useState} from 'react'
 import {User,Mail,Lock, Loader} from "lucide-react"
 import { Link, useNavigate } from 'react-router-dom';
 import PasswordStrengthMeter from '../component/PasswordStrengthMeter';
-import  {useAuthStore}  from '../store/authStore.js';
+import  {useAuthStore}  from '../store/authStore';
 
 const SignUpPage = () => {
   const [name,setName] = useState('');
@@ -14,10 +14,10 @@ const SignUpPage = () => {
 
   const {signup , error, isLoading}=useAuthStore();
   const handileSignup = async (e)=>{
-    e.preventDefult();
+    e.preventDefault();
     try {
        await signup(email,password,name);
-      navigate('/verify-email');
+       navigate('/verify-email');
     } catch (error) {
       console.log(error);
     }
@@ -28,7 +28,6 @@ const SignUpPage = () => {
     animate = {{opacity:1,y:0}}
     transition = {{duration:0.5}}
     whileHover={{scale:1.03}}
-    whileTap={{scale:0.98}}
     className = 'max-w-md w-full bg-gray-500 bg-opacity-30 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden'
     >
       <div className='p-8'>
@@ -65,7 +64,7 @@ const SignUpPage = () => {
           whileHover={{scale:1.03}}
           whileTap={{scale:0.98}}
           type="submit"
-          desabled = {isLoading}
+          disabled = { isLoading }
           >
           {isLoading ? <Loader className='animate-spin mx-auto ' size={24} />: "Sign Up"}
           </motion.button>
