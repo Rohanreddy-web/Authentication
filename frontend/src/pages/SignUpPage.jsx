@@ -12,11 +12,11 @@ const SignUpPage = () => {
   const [password,setPassword] = useState('');
   const navigate = useNavigate();
 
-  const {signup , error, isLoading}=useAuthStore();
+  const {signUp , error, isLoading}=useAuthStore();
   const handileSignup = async (e)=>{
     e.preventDefault();
     try {
-       await signup(email,password,name);
+       await signUp(email,password,name);
        navigate('/verify-email');
     } catch (error) {
       console.log(error);
@@ -27,7 +27,7 @@ const SignUpPage = () => {
     initial = {{opacity:0,y:20}}
     animate = {{opacity:1,y:0}}
     transition = {{duration:0.5}}
-    whileHover={{scale:1.03}}
+    // whileHover={{scale:1.03}}
     className = 'max-w-md w-full bg-gray-500 bg-opacity-30 backdrop-filter backdrop-blur-xl rounded-2xl shadow-xl overflow-hidden'
     >
       <div className='p-8'>
@@ -57,11 +57,11 @@ const SignUpPage = () => {
           onChange={(e) => (setPassword(e.target.value))}
           />
 
-          {error && <p className='text-red-500 font-semibold mt-2 '>{error}</p>}
+          {error && <p className='text-red-600 font-thick mt-2 '>{error}</p>}
           <PasswordStrengthMeter password={password} />
 
           <motion.button className='mt-5 w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-blue-500 text-white rounded-lg font-bold shadow-lg hover:from-sky-5 00 hover:to-blue-400 focus:outline-none focus-ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-600 transition duration-200'
-          whileHover={{scale:1.03}}
+          // whileHover={{scale:1.03}}
           whileTap={{scale:0.98}}
           type="submit"
           disabled = { isLoading }

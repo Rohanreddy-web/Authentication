@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 
 const API_URL = "http://localhost:5500/api/auth";
-axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true;
 export const useAuthStore = create((set)=> ({
     user: null,
     isAunthenticated : false,
@@ -11,7 +11,7 @@ export const useAuthStore = create((set)=> ({
     isCheckingAuth : true,
     message:null,
 
-    signup: async(email,password, name)=>{
+    signUp: async(email,password, name)=>{
         set({isLoading: true, error: null,})
         try {
             const response = await axios.post(`${API_URL}/signup`,{email,password,name});
@@ -24,4 +24,26 @@ export const useAuthStore = create((set)=> ({
             throw error;
         }
     },
+    verifyMail: async(code)=>{
+        set({isLoading:true,error:null})
+        try {
+            const response = await axios.post(`${API_URL}/verify-email`,{code})
+            set(
+                {
+                    user:response.data.user,
+                    isAunthenticated:true,
+                    isLoading:false
+                }
+            )
+            return response.data;
+        } catch (error) {
+            set(
+                {
+                    error: error.response.data.message || "Error in verifying email",
+                    isLoading:false
+                }
+            )
+            throw error;
+        }
+    }
 }));

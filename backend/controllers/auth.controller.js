@@ -75,7 +75,7 @@ export const signUp = async (req,res) =>{
         );
     }
 };
-export const verifyMail = async (req,res) => {
+export const verifyEmail = async (req,res) => {
     // 123456 six digit code
     const { code } = req.body;
     try {
