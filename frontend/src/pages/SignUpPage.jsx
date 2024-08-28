@@ -13,7 +13,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const {signUp , error, isLoading}=useAuthStore();
-  const handileSignup = async (e)=>{
+  const handleSignup = async (e)=>{
     e.preventDefault();
     try {
        await signUp(email,password,name);
@@ -34,7 +34,7 @@ const SignUpPage = () => {
         <h2 className='text-xl mb-6 font-bold text-center bg-gradient-to-r from-sky-400 to-blue-600 text-transparent bg-clip-text'>
           Create Account
         </h2>
-        <form onSubmit={handileSignup}>
+        <form onSubmit={handleSignup}>
           <Input
           icon ={User}
           type="text"

@@ -3,15 +3,24 @@ import { motion } from "framer-motion";
 import { Mail, Lock, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
 import Input from '../component/input';
+import { useAuthStore } from '../store/authStore';
 
  
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const isLoading = false;
-  const handleLogin = (e) => {
-    e.preventDefault();
-  }
+  const {LogIn, isLoading, error} = useAuthStore();
+
+  const handleLogin = async (e) => {
+		e.preventDefault();
+     try {
+       await LogIn(email, password);
+     } catch (error) {
+      console.log("login handle failed",error);
+     }
+    
+	};
+
   return (
     <motion.div
     initial = {{ opacity: 0, y:20 }}
@@ -25,32 +34,33 @@ const LoginPage = () => {
           Welcome Back
         </h2>
         <form 
-        onSubmit={handleLogin}
+        onSubmit={ handleLogin }
         >
           <Input 
           type="email"
-          icon = {Mail}
+          icon = { Mail }
           placeholder = "Email Address"
-          value={email}
+          value={ email }
           onChange = {(e)=>setEmail(e.target.value)}
           />
           <Input 
           type="password"
-          icon = {Lock}
+          icon = { Lock }
           placeholder = "Password Dude..?"
-          value={password}
+          value={ password }
           onChange = {(e)=>setPassword(e.target.value)}
           />
           <div className='flex items-center mb-6'>
             <Link to='/forgot-password' className='text-sm text-gray-300 hover:underline'>Forgot password?</Link>
           </div>
+          {error && <p className='text-red-600 font-thick mb-4'>{error}</p>}
           <motion.button 
           // whileHover={{scale:1.02}}
           whileTap={{scale:0.98}}
           className="w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-blue-500 text-white rounded-lg font-bold  shadow-lg hover:from-sky-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-500 transition duration-200"
           type="submit"
-          disabled={isLoading}>
-            {isLoading ? <Loader className='w-6 h-6 mx-auto animate-spin hover:text-black'/>: "Login"}
+          disabled={ isLoading }>
+            {isLoading ? <Loader className='w-6 h-6 mx-auto animate-spin'/>: "Login"}
           </motion.button>
         </form>
       </div>
