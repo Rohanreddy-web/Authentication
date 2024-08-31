@@ -9,7 +9,7 @@ export const verifyToken = (req, res, next) => {
                 success:false,
                 message:"Unauthorized - no token provided"
             }
-        )
+        );
     }
     try {
        const decoded = jwt.verify(token,process.env.JWT_SECRET);

@@ -64,7 +64,7 @@ export const signUp = async (req,res) =>{
                     password: undefined
                 }
             }
-        )
+        );
     } catch (error) {
         res
         .status(400).json(
@@ -81,7 +81,7 @@ export const verifyEmail = async (req,res) => {
     try {
         const user = await User.findOne({
             verificationToken: code,
-            verificationTokenExpiresAt : { $gt : Date.now()} // still valide coe not expired
+            verificationTokenExpiresAt : { $gt : Date.now()} // still valid coe not expired
         });
         if(!user){
             return res
@@ -141,7 +141,7 @@ export const LogIn = async (req,res) =>{
         res.status(400).json(
             {
                 success: false,
-                message: "invalid credientials",
+                message: "invalid credentials",
             }
         )
     }
@@ -171,7 +171,7 @@ export const LogIn = async (req,res) =>{
      
    } catch (error) {
     res.status(400).json(
-        console.error("error in login ", error),
+        console.error("error in loggingIn ", error),
         {
             success:false,
             message: error.message,
@@ -201,6 +201,7 @@ export const forgotPassword = async (req, res) => {
 
         //send email
         await sendPasswordResetEmail(user.email,`${process.env.CLIENT_URL}/reset-password/${resetToken}`)
+
         res.status(200).json(
             {
                 success: true,
@@ -208,7 +209,7 @@ export const forgotPassword = async (req, res) => {
             }
         )
     } catch (error) {
-        console.error("error in forgot password", error);
+        console.error("error in forgotPassword", error);
         res.status(400).json(
             {
                 success: false,
@@ -250,20 +251,20 @@ export const resetPassword = async (req, res) => {
         res.status(200).json(
             {
                 success: true,
-                message  :"password 'reset successful' sent to your mail"
+                message  :"password 'Reset Successful'"
             }
         )
     } catch (error) {
-        console.error("error in sending password reset successful mail", error);
+        console.error("error in  password resetting ", error);
         res.status(400).json(
             {
                 success: false,
                 message: error.message,
             }
-        )
+        );
         
     }
-}
+};
 
 export const checkAuth = async (req,res) => {
    try {

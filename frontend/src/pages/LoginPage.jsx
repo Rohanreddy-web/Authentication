@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import React,{  useState } from 'react'
 import { motion } from "framer-motion";
 import { Mail, Lock, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -53,13 +53,16 @@ const LoginPage = () => {
           <div className='flex items-center mb-6'>
             <Link to='/forgot-password' className='text-sm text-gray-300 hover:underline'>Forgot password?</Link>
           </div>
+
           {error && <p className='text-red-600 font-thick mb-4'>{error}</p>}
+
           <motion.button 
           // whileHover={{scale:1.02}}
-          whileTap={{scale:0.98}}
-          className="w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-blue-500 text-white rounded-lg font-bold  shadow-lg hover:from-sky-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-500 transition duration-200"
-          type="submit"
-          disabled={ isLoading }>
+            whileTap={{scale:0.98}}
+            className="w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-blue-500 text-white rounded-lg font-bold  shadow-lg hover:from-sky-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-500 transition duration-200"
+            type="submit"
+            disabled={ isLoading }
+          >
             {isLoading ? <Loader className='w-6 h-6 mx-auto animate-spin'/>: "Login"}
           </motion.button>
         </form>

@@ -1,6 +1,6 @@
 import {motion} from "framer-motion";
 import Input from '../component/Input';
-import {React,useState} from 'react'
+import React,{useState} from 'react'
 import {User,Mail,Lock, Loader} from "lucide-react"
 import { Link, useNavigate } from 'react-router-dom';
 import PasswordStrengthMeter from '../component/PasswordStrengthMeter';
@@ -13,7 +13,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const {signUp , error, isLoading}=useAuthStore();
-  const handleSignup = async (e)=>{
+  const handleSignUp = async (e)=>{
     e.preventDefault();
     try {
        await signUp(email,password,name);
@@ -34,7 +34,7 @@ const SignUpPage = () => {
         <h2 className='text-xl mb-6 font-bold text-center bg-gradient-to-r from-sky-400 to-blue-600 text-transparent bg-clip-text'>
           Create Account
         </h2>
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleSignUp}>
           <Input
           icon ={User}
           type="text"
@@ -60,13 +60,14 @@ const SignUpPage = () => {
           {error && <p className='text-red-600 font-thick mt-2 '>{error}</p>}
           <PasswordStrengthMeter password={password} />
 
-          <motion.button className='mt-5 w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-blue-500 text-white rounded-lg font-bold shadow-lg hover:from-sky-5 00 hover:to-blue-400 focus:outline-none focus-ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-600 transition duration-200'
-          // whileHover={{scale:1.03}}
-          whileTap={{scale:0.98}}
-          type="submit"
-          disabled = { isLoading }
-          >
-          {isLoading ? <Loader className='animate-spin mx-auto ' size={24} />: "Sign Up"}
+            <motion.button 
+              className='mt-5 w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-blue-500 text-white rounded-lg font-bold shadow-lg hover:from-sky-5 00 hover:to-blue-400 focus:outline-none focus-ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-gray-600 transition duration-200'
+              // whileHover={{scale:1.03}}
+              whileTap={{scale:0.98}}
+              type="submit"
+              disabled = { isLoading }
+            >
+              {isLoading ? <Loader className='animate-spin mx-auto ' size={24} />: "Sign Up"}
           </motion.button>
         </form>
       </div>

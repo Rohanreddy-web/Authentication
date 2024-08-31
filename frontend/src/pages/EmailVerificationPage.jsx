@@ -1,4 +1,4 @@
-import { useRef , React, useState, useEffect} from 'react'
+import  React,{ useRef , useState, useEffect} from 'react';
 import { useNavigate  } from 'react-router-dom';
 import { motion } from "framer-motion"
 import { useAuthStore } from '../store/authStore';
@@ -88,8 +88,7 @@ const EmailVerificationPage = () => {
                 value={digit}
                 onChange={(e)=> handleChange(index,e.target.value)}
                 onKeyDown={(e)=> handleKeyDown(index,e)}
-                className='w-12 h-12 text-center text-2xl font-bold bg-gray-600 bg-opacity-50 text-white hover:border
-                hover:border-gray-500   rounded-lg shadow-xl focus:border-sky-400 focus:outline-none'
+                className='w-12 h-12 text-center text-2xl font-bold bg-gray-600 bg-opacity-50 text-white border-2 border-gray-400 hover:border-gray-500   rounded-lg shadow-xl focus:border-sky-400 focus:outline-none'
                 />
               ))
             }
@@ -100,12 +99,12 @@ const EmailVerificationPage = () => {
           whileTap={{scale:0.95}}
           type='submit'
           disabled ={isLoading || code.some((digit)=> !digit)}
-          className='w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-blue-500 text-white rounded-lg font-bold  shadow-lg hover:from-sky-500 hover:to-blue-600 focus:outline-none transition duration-200'>
-            {isLoading ? "Verifying..." : "Verify Email"}
+          className='w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-blue-500 text-white rounded-lg font-bold  shadow-lg hover:from-sky-500 hover:to-blue-600 focus:outline-none transition duration-200'
+          >
+          {isLoading ? "Verifying..." : "Verify Email"}
           </motion.button>
         </form>
       </motion.div>
-    
   )
 }
 

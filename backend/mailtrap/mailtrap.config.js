@@ -21,7 +21,7 @@ export const sender = {
 //     from: sender,
 //     to: recipients,
 //     subject: "You are awesome!",
-//     html: "Congrats for sending test email with Mailtrap!",// html to modify it more elegently pic, bold, etc etc
+//     html: "Congrats for sending test email with Mailtrap!",// html to modify it more elegantly pic, bold, etc etc
 //     category: "Integration Test",
 //   })
 //   .then(console.log, console.error);
