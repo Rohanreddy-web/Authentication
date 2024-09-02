@@ -75,5 +75,4 @@ const LoginPage = () => {
     </motion.div>
   )
 }
-
 export default LoginPage
