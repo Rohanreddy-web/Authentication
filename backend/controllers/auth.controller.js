@@ -120,7 +120,38 @@ export const verifyEmail = async (req,res) => {
         );
     }
     
-}
+};
+export const LogIn = async (req, res) => {
+	const { email, password } = req.body;
+	try {
+		const user = await User.findOne({ email });
+		if (!user) {
+			return res.status(400).json({ success: false, message: "Invalid credentials" });
+		}
+		const isPasswordValid = await bcryptjs.compare(password, user.password);
+		if (!isPasswordValid) {
+			return res.status(400).json({ success: false, message: "InCorrect Password" });
+		}
+
+		generateTokenAndSetCookie(res, user._id);
+
+		user.lastLogin = new Date();
+		await user.save();
+
+		res.status(200).json({
+			success: true,
+			message: "Logged in successfully",
+			user: {
+				...user._doc,
+				password: undefined,
+			},
+		});
+	} catch (error) {
+		console.log("Error in login ", error);
+		res.status(400).json({ success: false, message: error.message });
+	}
+};
+
 export const logOut = (req,res) =>{
     res.clearCookie("token");
     res
@@ -132,53 +163,7 @@ export const logOut = (req,res) =>{
         }
     )
 }
-export const LogIn = async (req,res) =>{
-    const {email , password} = req.body;
 
-   try {
-    const user = await User.findOne({email});
-    if(!user){
-        res.status(400).json(
-            {
-                success: false,
-                message: "invalid credentials",
-            }
-        )
-    }
-    const isPasswordValid = await bcryptjs.compare(password , user.password); // ui password compared with database password
-    if(!isPasswordValid){
-        res.status(400).json(
-            {
-                success: false,
-                message: "invalid password",
-            }
-        )
-    }
-    await generateTokenAndSetCookie(res, user._id);
-    user.lastLogin = new Date();
-    await user.save();
-
-    res.status(200).json(
-        {
-            success: true,
-            message : `loggedIn successfully`,
-            user: {
-                ...user._doc,
-                password: undefined
-            }
-        }
-    )
-     
-   } catch (error) {
-    res.status(400).json(
-        console.error("error in loggingIn ", error),
-        {
-            success:false,
-            message: error.message,
-        }
-    )
-   }
-}
 
 export const forgotPassword = async (req, res) => {
     const {email} = req.body;

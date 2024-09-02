@@ -62,7 +62,7 @@ const LoginPage = () => {
             className="w-full py-3 px-4 bg-gradient-to-r from-sky-400 to-blue-500 text-white rounded-lg font-bold  shadow-lg hover:from-sky-500 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-gray-500 transition duration-200"
             type="submit"
             disabled={ isLoading }
-          >
+            >
             {isLoading ? <Loader className='w-6 h-6 mx-auto animate-spin'/>: "Login"}
           </motion.button>
         </form>

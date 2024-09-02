@@ -1,4 +1,4 @@
-//const express = require('express';) not require as we changed type in packge.json to modules from ccommon
+//const express = require('express';) not require as we changed type in package.json to modules from common
 
 import  express  from "express";
 import dotenv from "dotenv";
@@ -24,6 +24,14 @@ app.use(express.json());//middleware(json format): allows us to parse incoming r
 app.use(cookieParser());// allows us to parse incoming cookies
 
 app.use("/api/auth", authRoutes)
+
+if (process.env.NODE_ENV === "production") {
+	app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
+	});
+}
 app.listen(PORT, () => {
     connectDb();
     console.log(`Server is running on port: ${PORT}`);
