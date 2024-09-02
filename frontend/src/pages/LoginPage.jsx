@@ -2,7 +2,7 @@ import React,{  useState } from 'react'
 import { motion } from "framer-motion";
 import { Mail, Lock, Loader } from "lucide-react";
 import { Link } from "react-router-dom";
-import Input from '../component/input';
+import Input from '../component/Input';
 import { useAuthStore } from '../store/authStore';
 
  
